@@ -6,7 +6,7 @@ describe RestClient::Request do
 
     @uri = double("uri")
     @uri.stub(:request_uri).and_return('/resource')
-    @uri.stub(:host).and_return('some')
+    @uri.stub(:hostname).and_return('some')
     @uri.stub(:port).and_return(80)
 
     @net = double("net::http base")
@@ -107,7 +107,8 @@ describe RestClient::Request do
   end
 
   it "uses netrc credentials" do
-    URI.stub(:parse).and_return(double('uri', :user => nil, :password => nil, :host => 'example.com'))
+    uri = double('uri', :user => nil, :password => nil, :hostname => 'example.com')
+    URI.stub(:parse).and_return(uri)
     Netrc.stub(:read).and_return('example.com' => ['a', 'b'])
     @request.parse_url_with_auth('http://example.com/resource')
     @request.user.should eq 'a'

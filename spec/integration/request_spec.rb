@@ -9,6 +9,16 @@ describe RestClient::Request do
     WebMock.enable!
   end
 
+  context "ipv6" do
+    it "is successful with an ipv6 address" do
+      request = RestClient::Request.new(
+        :method => :get,
+        :url => 'http://[::1]',
+      )
+      expect { request.execute }.to_not raise_error
+    end
+  end
+
   describe "ssl verification" do
     it "is successful with the correct ca_file" do
       request = RestClient::Request.new(
