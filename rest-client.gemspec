@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.email = 'rest.client@librelist.com'
   s.executables = ['restclient']
   s.extra_rdoc_files = ["README.rdoc", "history.md"]
-  s.files = `git ls-files`.split("\n")
-  s.test_files = `git ls-files -- spec/*`.split("\n")
+  s.files = Dir['lib/**/*'] + Dir['bin/*'] + Dir['fixtures/**/*'] + %w(AUTHORS README.rdoc Rakefile history.md rest-client.gemspec)
+  s.test_files = Dir['spec/**/*']
   s.homepage = 'http://github.com/rest-client/rest-client'
   s.summary = 'Simple HTTP and REST client for Ruby, inspired by microframework syntax for specifying actions.'
 
